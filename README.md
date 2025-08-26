@@ -426,7 +426,7 @@ php yii serve
 http://localhost:8080
 
 ```
---
+---
 
 ## Database Configuration for Testing
 
@@ -435,30 +435,72 @@ http://localhost:8080
 CREATE DATABASE rti_assessment_db_test;
 ```
 
-Configure config/test_db.php:
+2. Configure config/test_db.php:
+```bash
+
+<?php $db = require __DIR__ . '/db.php'; // test database! Important not to run tests on production or development databases $db['dsn'] = 'mysql:host=localhost;dbname=rti_assessment_db_test'; return $db;
 ```
 
-<?php $db = require __DIR__ . '/db.php'; // test database! Important not to run tests on production or development databases $db['dsn'] = 'mysql:host=localhost;dbname=rti_assessment_db_test'; return $db; ```
-Migrations for Test Database
+---
 
-Run all migrations in the test database:
+## Migrations for Test Database
 
-```
+# Run all migrations in the test database:
+
+```bash
 php yii migrate/fresh --interactive=0 --db=testDb
 ```
 
 This will drop all tables and recreate them in the rti_assessment_db_test database.
 
-Running Unit Tests
+# Running Unit Tests
 
-Make sure phpunit and codeception are installed:
-```
+1. Make sure phpunit and codeception are installed:
+```bash
 composer require --dev phpunit/phpunit codeception/codeception
 ```
 
-Run the TaskControllerTest:
-```
+2. Run the TaskControllerTest:
+```bash
 vendor/bin/codecept run unit tests/unit/controllers/TaskControllerTest.php
 ```
 
-The console will display the test results with passed/failed assertions.
+3. The console will display the test results with passed/failed assertions.
+
+===
+---
+### Assumptions and Known Issues
+## Assumptions
+- The application is running on a local PHP server (XAMPP, Laragon, Homestead, or PHP built-in server).
+
+- The database user has full privileges to create, drop, and modify tables in both development and test databases.
+
+- test_db.php is correctly configured to point to rti_assessment_db_test.
+
+- Migrations are assumed to be up-to-date; the test database will be fully rebuilt with migrate/fresh.
+
+- All API requests/responses are expected to be in JSON format.
+
+- Tags used in tasks are pre-existing in the tag table.
+
+- Date fields are always formatted as YYYY-MM-DD.
+
+- Soft-deletion is used (is_deleted = true) instead of permanently removing records.
+
+- CSRF validation is disabled for API simplicity
+# Known Issues
+- Unit tests will fail if rti_assessment_db_test is not created or migrations have not been run.
+
+- Running tests against a production or development database may corrupt data.
+
+- Some older PHP versions (<7.4) may not be fully compatible with the current Yii2 setup.
+
+- Soft-deleted tasks are not excluded by default in some custom queries; ensure filters are applied.
+
+- API error responses may not be fully standardized for all edge cases.
+
+- If phpunit or codeception are not installed, test execution will fail.
+
+- Concurrent modifications to tasks or tags may lead to inconsistent test results.
+
+- Some frontend pages may depend on seeded data; empty databases might show empty lists.
