@@ -3,33 +3,6 @@
     <br>
 </p>
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
-rapidly creating small projects.
-
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![build](https://github.com/yiisoft/yii2-app-basic/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-basic/actions?query=workflow%3Abuild)
-
-DIRECTORY STRUCTURE
--------------------
-
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
-
-
 
 REQUIREMENTS
 ------------
@@ -434,30 +407,31 @@ This document describes the available API endpoints for managing tasks, includin
 
 ---
 
-How to Run Frontend
+## How to Run Frontend
 
-Ensure your PHP server (XAMPP, Laragon, Homestead) is running.
+1. Ensure your PHP server (XAMPP, Laragon, Homestead) is running.
 
-Navigate to the project root directory:
-```
+2. Navigate to the project root directory:
+```bash
 cd C:\Users\Window\OneDrive\Desktop\John\Assessments\rti-solution-llc\crud_assessment
 ```
 
-Start the PHP built-in server for development:
-```
+3. Start the PHP built-in server for development:
+```bash
 php yii serve
 ```
 
-Open your browser and go to:
-```
+4. Open your browser and go to:
+```bash
 http://localhost:8080
 
 ```
+--
 
-Database Configuration for Testing
+## Database Configuration for Testing
 
-Create the test database:
-```
+1. Create the test database:
+```bash
 CREATE DATABASE rti_assessment_db_test;
 ```
 
