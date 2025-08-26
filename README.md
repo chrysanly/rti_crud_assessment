@@ -239,13 +239,6 @@ This document describes the available API endpoints for managing tasks, includin
 
 ---
 
-## Base URL
-
-http://your-app-domain.com/task
-
-
----
-
 ## Endpoints
 
 ### 1. List Tasks
@@ -293,5 +286,154 @@ http://your-app-domain.com/task
     { "id": 1, "name": "Work" },
     { "id": 2, "name": "Personal" }
   ]
+
+}
+```
+
+---
+
+### 1. View Tasks
+
+**Endpoint:** `GET /task/view?id={id}`  
+
+**Response:**
+
+```json
+{
+  "id": 1,
+  "title": "Finish report",
+  "status": "pending",
+  "priority": "high",
+  "due_date": "2025-09-01",
+  "tags": [
+    { "id": 1, "name": "Work" }
+  ]
+}
+```
+---
+
+### 1. Create Tasks
+
+**Endpoint:** `POST /task/create`  
+
+**Request Body:**
+
+```json
+{
+  "title": "New Task",
+  "status": "pending",
+  "priority": "medium",
+  "due_date": "2025-09-05",
+  "tags": [1, 2]
 }
 
+```
+
+**Response (Success 201):**
+
+```json
+{
+  "id": 2,
+  "title": "New Task",
+  "status": "pending",
+  "priority": "medium",
+  "due_date": "2025-09-05",
+  "tags": [
+    { "id": 1, "name": "Work" },
+    { "id": 2, "name": "Personal" }
+  ]
+}
+
+
+```
+**Response (Validation Error 422):**
+
+```json
+{
+  "title": ["Title cannot be blank."]
+}
+
+
+```
+
+---
+
+### 1. Update Tasks
+
+**Endpoint:** `PUT /task/update/?id={id}`  
+**Request Body:** Same as Create
+**Response (Success 200):**
+
+```json
+{
+  "id": 2,
+  "title": "Updated Task",
+  "status": "completed",
+  "priority": "high",
+  "due_date": "2025-09-05",
+  "tags": [
+    { "id": 1, "name": "Work" }
+  ]
+}
+
+
+```
+---
+
+### 1. Delete Tasks
+
+**Endpoint:** `DELETE /task/delete/?id={id}`  
+**Response (Success 200):**
+
+```json
+{
+  "message": "Task deleted successfully"
+}
+
+```
+---
+
+### 1. Retrieve Tasks
+
+**Endpoint:** `DELETE /task/retrieve/?id={id}`  
+**Response (Success 200):**
+
+```json
+{
+  "message": "Task retrieved successfully"
+}
+
+```
+---
+
+### 1. Toggle Status
+
+**Endpoint:** `POST /task/toggle-status?id={id}`  
+**Response:**
+
+```json
+{
+  "id": 2,
+  "title": "Updated Task",
+  "status": "completed",
+  "priority": "high",
+  "due_date": "2025-09-05",
+  "tags": [
+    { "id": 1, "name": "Work" }
+  ]
+}
+
+```
+
+---
+
+### NOTE ###
+All requests and responses are in JSON format.
+
+tags is an array of tag IDs in create/update requests, and an array of objects in responses.
+
+Deleted tasks are soft-deleted using is_deleted = true.
+
+The API does not require CSRF validation for simplicity.
+
+All date fields should use YYYY-MM-DD format.
