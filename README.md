@@ -231,3 +231,67 @@ vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xm
 ```
 
 You can see code coverage output under the `tests/_output` directory.
+
+
+# Task API Documentation
+
+This document describes the available API endpoints for managing tasks, including creating, updating, deleting, retrieving, and listing tasks. All endpoints return JSON responses.
+
+---
+
+## Base URL
+
+http://your-app-domain.com/task
+
+
+---
+
+## Endpoints
+
+### 1. List Tasks
+
+**Endpoint:** `GET /task/index`  
+
+**Query Parameters:**
+
+| Parameter     | Type    | Description |
+|---------------|---------|-------------|
+| showDeleted   | boolean | Include deleted tasks (optional, default: false) |
+| hideDeleted   | boolean | Hide deleted tasks (optional, default: false) |
+| status        | string  | Filter by status (`pending` or `completed`) |
+| priority      | string  | Filter by priority (`low`, `medium`, `high`) |
+| from          | string  | Filter by start date (YYYY-MM-DD) |
+| to            | string  | Filter by end date (YYYY-MM-DD) |
+| keyword       | string  | Search keyword in task title |
+| sort          | string  | Sort by column (default: `created_at`) |
+| order         | string  | Sort order (`ASC` or `DESC`) |
+| page          | int     | Page number (default: 0) |
+| limit         | int     | Number of tasks per page (default: 10) |
+
+**Response:**
+
+```json
+{
+  "tasks": {
+    "items": [
+      {
+        "id": 1,
+        "title": "Finish report",
+        "status": "pending",
+        "priority": "high",
+        "due_date": "2025-09-01",
+        "tags": [
+          { "id": 1, "name": "Work" }
+        ]
+      }
+    ],
+    "total": 1,
+    "page": 0,
+    "limit": 10
+  },
+  "allTags": [
+    { "id": 1, "name": "Work" },
+    { "id": 2, "name": "Personal" }
+  ]
+}
+
