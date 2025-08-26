@@ -1,8 +1,5 @@
 <p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
+    <h1 align="center">RTI Assessment CRUD Application</h1>
     <br>
 </p>
 
@@ -427,13 +424,67 @@ This document describes the available API endpoints for managing tasks, includin
 
 ---
 
-### NOTE ###
-All requests and responses are in JSON format.
+## Notes
 
-tags is an array of tag IDs in create/update requests, and an array of objects in responses.
+- All requests and responses are in JSON format.
+- `tags` is an array of tag IDs in create/update requests, and an array of objects in responses.
+- Deleted tasks are soft-deleted using `is_deleted = true`.
+- The API does **not require CSRF validation** for simplicity.
+- All date fields should use `YYYY-MM-DD` format.
 
-Deleted tasks are soft-deleted using is_deleted = true.
+---
 
-The API does not require CSRF validation for simplicity.
+How to Run Frontend
 
-All date fields should use YYYY-MM-DD format.
+Ensure your PHP server (XAMPP, Laragon, Homestead) is running.
+
+Navigate to the project root directory:
+```
+cd C:\Users\Window\OneDrive\Desktop\John\Assessments\rti-solution-llc\crud_assessment
+```
+
+Start the PHP built-in server for development:
+```
+php yii serve
+```
+
+Open your browser and go to:
+```
+http://localhost:8080
+
+```
+
+Database Configuration for Testing
+
+Create the test database:
+```
+CREATE DATABASE rti_assessment_db_test;
+```
+
+Configure config/test_db.php:
+```
+
+<?php $db = require __DIR__ . '/db.php'; // test database! Important not to run tests on production or development databases $db['dsn'] = 'mysql:host=localhost;dbname=rti_assessment_db_test'; return $db; ```
+Migrations for Test Database
+
+Run all migrations in the test database:
+
+```
+php yii migrate/fresh --interactive=0 --db=testDb
+```
+
+This will drop all tables and recreate them in the rti_assessment_db_test database.
+
+Running Unit Tests
+
+Make sure phpunit and codeception are installed:
+```
+composer require --dev phpunit/phpunit codeception/codeception
+```
+
+Run the TaskControllerTest:
+```
+vendor/bin/codecept run unit tests/unit/controllers/TaskControllerTest.php
+```
+
+The console will display the test results with passed/failed assertions.
