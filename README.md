@@ -467,9 +467,9 @@ vendor/bin/codecept run unit tests/unit/controllers/TaskControllerTest.php
 
 3. The console will display the test results with passed/failed assertions.
 
-===
 ---
-### Assumptions and Known Issues
+
+### Assumptions and Known Issues ###
 ## Assumptions
 - The application is running on a local PHP server (XAMPP, Laragon, Homestead, or PHP built-in server).
 
@@ -488,7 +488,7 @@ vendor/bin/codecept run unit tests/unit/controllers/TaskControllerTest.php
 - Soft-deletion is used (is_deleted = true) instead of permanently removing records.
 
 - CSRF validation is disabled for API simplicity
-# Known Issues
+## Known Issues
 - Unit tests will fail if rti_assessment_db_test is not created or migrations have not been run.
 
 - Running tests against a production or development database may corrupt data.
@@ -504,3 +504,6 @@ vendor/bin/codecept run unit tests/unit/controllers/TaskControllerTest.php
 - Concurrent modifications to tasks or tags may lead to inconsistent test results.
 
 - Some frontend pages may depend on seeded data; empty databases might show empty lists.
+
+### Postman Collection ###
+[Download RTI Solutions LLC Assessment Collection](https://drive.google.com/uc?export=download&id=146fg_V9S7MNRJ1NDSdu5D0SRjx6ndxrg)
